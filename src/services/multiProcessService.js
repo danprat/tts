@@ -228,11 +228,25 @@ class MultiProcessApiKeyManager {
 
     // Distribusi key ke setiap chunk dalam batch
     const distributedKeys = [];
+    console.log(`🚀 Round-Robin Distribution: ${batchSize} chunks → ${keysSehat.length} API keys`);
+    
     for (let i = 0; i < batchSize; i++) {
       const keyIndex = i % keysSehat.length; // Round-robin distribution
-      distributedKeys.push(keysSehat[keyIndex]);
+      const selectedKey = keysSehat[keyIndex];
+      distributedKeys.push(selectedKey);
+      
+      console.log(`   C${i} → Key${keyIndex + 1} (${selectedKey.substring(0, 10)}...) [index ${i} % ${keysSehat.length} = ${keyIndex}]`);
     }
 
+    // Count distribution untuk summary
+    const keyCount = {};
+    distributedKeys.forEach(key => {
+      const keyName = key.substring(0, 10) + '...';
+      keyCount[keyName] = (keyCount[keyName] || 0) + 1;
+    });
+    
+    console.log(`📊 Distribution Summary:`, keyCount);
+    
     return distributedKeys;
   }
 
