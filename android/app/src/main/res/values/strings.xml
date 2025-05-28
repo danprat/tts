@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Multi-Process TTS</string>
+    <string name="title_activity_main">Multi-Process TTS</string>
+    <string name="package_name">com.danypratmanto.tts</string>
+    <string name="custom_url_scheme">com.danypratmanto.tts</string>
+</resources>

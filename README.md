@@ -44,6 +44,7 @@
 ### Prerequisites
 - Node.js 16+ dan npm/pnpm
 - Google Gemini API Keys (gratis di [Google AI Studio](https://aistudio.google.com/app/apikey))
+- **For Android APK:** Android Studio + SDK (optional, untuk advanced builds)
 
 ### Quick Start
 ```bash
@@ -71,6 +72,34 @@ pnpm build
 # Preview production build
 pnpm preview
 ```
+
+## 📱 **Android APK Build**
+
+### Quick Android Build
+```bash
+# Build debug APK (ready to install)
+npm run android:build
+
+# Build release APK (production)
+npm run android:release
+
+# Open Android Studio untuk advanced configuration
+npm run android:open
+```
+
+### Detailed Android Setup
+Lihat **[ANDROID_BUILD.md](ANDROID_BUILD.md)** untuk complete guide:
+- ✅ Prerequisites & SDK setup
+- ✅ Step-by-step build process
+- ✅ APK customization (icon, splash screen)
+- ✅ Distribution & testing
+- ✅ Troubleshooting common issues
+
+### APK Information
+- **📱 Package ID:** `com.danypratmanto.tts`
+- **📊 Size:** ~8-12 MB (debug), ~6-8 MB (release)
+- **🎯 Target:** Android 7.0+ (API 24)
+- **🚀 Features:** Full TTS functionality + mobile optimizations
 
 ## 🔑 **API Keys Setup**
 
