@@ -687,14 +687,17 @@ const AppMultiProcess = () => {
                     type="number"
                     className="setting-input"
                     min={1}
-                    max={10}
+                    max={getHealthyApiKeysCount() || 1}
                     value={customSettings.maxConcurrency || getMaxConcurrency()}
-                    onChange={(e) => updateCustomSettings({ 
-                      maxConcurrency: Math.max(1, Math.min(10, parseInt(e.target.value) || 4))
-                    })}
+                    onChange={(e) => {
+                      const maxAllowed = getHealthyApiKeysCount() || 1;
+                      updateCustomSettings({ 
+                        maxConcurrency: Math.max(1, Math.min(maxAllowed, parseInt(e.target.value) || 1))
+                      });
+                    }}
                   />
                   <div className="setting-helper">
-                    Parallel across {getHealthyApiKeysCount()} API keys
+                    Parallel across {getHealthyApiKeysCount()} API keys (max: {getHealthyApiKeysCount()}x)
                   </div>
                 </div>
               </div>
@@ -712,25 +715,37 @@ const AppMultiProcess = () => {
                 <div className="preset-buttons">
                   <button
                     className="preset-button"
-                    onClick={() => updateCustomSettings({ chunkSize: 300, maxConcurrency: 2 })}
+                    onClick={() => {
+                      const maxConcurrency = Math.min(2, getHealthyApiKeysCount() || 1);
+                      updateCustomSettings({ chunkSize: 300, maxConcurrency });
+                    }}
                   >
                     🐌 Safe
                   </button>
                   <button
                     className="preset-button"
-                    onClick={() => updateCustomSettings({ chunkSize: 500, maxConcurrency: 4 })}
+                    onClick={() => {
+                      const maxConcurrency = Math.min(4, getHealthyApiKeysCount() || 1);
+                      updateCustomSettings({ chunkSize: 500, maxConcurrency });
+                    }}
                   >
                     ⚡ Balanced
                   </button>
                   <button
                     className="preset-button"
-                    onClick={() => updateCustomSettings({ chunkSize: 800, maxConcurrency: 6 })}
+                    onClick={() => {
+                      const maxConcurrency = Math.min(6, getHealthyApiKeysCount() || 1);
+                      updateCustomSettings({ chunkSize: 800, maxConcurrency });
+                    }}
                   >
                     🚀 Fast
                   </button>
                   <button
                     className="preset-button"
-                    onClick={() => updateCustomSettings({ chunkSize: 1200, maxConcurrency: 8 })}
+                    onClick={() => {
+                      const maxConcurrency = getHealthyApiKeysCount() || 1; // Max sesuai jumlah keys
+                      updateCustomSettings({ chunkSize: 1200, maxConcurrency });
+                    }}
                   >
                     ⚡ Max
                   </button>
@@ -750,7 +765,9 @@ const AppMultiProcess = () => {
                       <ul>
                         <li>2x = 2 chunk parallel dengan 2 API key berbeda</li>
                         <li>4x = 4 chunk parallel dengan 4 API key berbeda</li>
-                        <li>Max dibatasi oleh jumlah API key yang sehat</li>
+                        <li><strong>Max dibatasi oleh jumlah API key yang sehat ({getHealthyApiKeysCount()} keys)</strong></li>
+                        <li>Kalau punya 3 keys, max concurrency = 3x</li>
+                        <li>Kalau punya 10 keys, max concurrency = 10x</li>
                       </ul>
                     </div>
                     <div className="tip-item">

@@ -65,11 +65,21 @@ class MultiProcessApiKeyManager {
   }
 
   setMaxConcurrency(maxConcurrency) {
-    this.maxConcurrency = Math.max(1, Math.min(maxConcurrency, 10)); // Limit antara 1-10
+    // Gunakan jumlah API keys sehat sebagai batas maksimal, bukan hardcoded limit
+    const healthyKeysCount = this.ambilApiKeysSehat().length;
+    const maxAllowed = Math.max(1, healthyKeysCount); // Minimum 1, maksimal sesuai API keys sehat
+    
+    this.maxConcurrency = Math.max(1, Math.min(maxConcurrency, maxAllowed));
+    
+    if (maxConcurrency > maxAllowed) {
+      console.warn(`⚠️ Max Concurrency dibatasi ke ${maxAllowed}x (jumlah API keys sehat: ${healthyKeysCount})`);
+    }
   }
 
   getMaxConcurrency() {
-    return this.maxConcurrency;
+    // Double-check limit dengan jumlah keys sehat saat ini
+    const healthyKeysCount = this.ambilApiKeysSehat().length;
+    return Math.min(this.maxConcurrency, healthyKeysCount);
   }
 
   resetStats() {
