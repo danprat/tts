@@ -1,234 +1,222 @@
-# 🎤 Gemini TTS - Text to Speech App
+# 🎵 Multi-Process TTS App
 
-Aplikasi Text-to-Speech modern menggunakan Google Gemini AI dengan antarmuka yang bersih dan responsif.
+> **Advanced Text-to-Speech aplikasi dengan multi-process parallel processing menggunakan Google Gemini API**
 
-## ✨ Fitur
+[![React](https://img.shields.io/badge/React-18.0-blue.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-4.5-green.svg)](https://vitejs.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![License](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-- 🎯 **Konversi Text ke Audio** - Ubah text menjadi suara natural menggunakan Gemini AI
-- 🎵 **4 Pilihan Suara** - Kore, Charon, Aoede, dan Fenrir dengan karakteristik berbeda
-- 🔑 **Multi API Key Round Robin** - Gunakan beberapa API key secara bergantian
-- 📄 **Unlimited Text & File Upload** - Support text panjang dan upload file .txt hingga 10MB
-- ✂️ **Smart Chunking** - Otomatis pecah text per 500 karakter berdasarkan kalimat
-- 🔄 **Resume Support** - Lanjutkan processing dari chunk yang error tanpa mengulang dari awal
-- 📊 **Real-time Progress** - Monitor progress dan API key usage
-- 🎧 **Multiple Audio Options** - Download gabungan atau file terpisah per chunk
-- 📱 **Responsive Design** - Tampilan optimal di desktop dan mobile
-- 🔊 **Audio Player** - Putar audio langsung di browser dengan kontrol individual
-- 💾 **Download Audio** - Simpan audio dalam format WAV
-- ⚡ **Real-time Processing** - Generate audio dengan cepat
-- 🛡️ **Error Handling** - Pesan error yang jelas dan informatif
+## 🚀 **Key Features**
 
-## 🚀 Quick Start
+### ⚡ **Multi-Process Engine**
+- **Parallel Processing** dengan distribusi ke multiple API keys
+- **Custom Concurrency Settings** - Atur berapa chunk diproses bersamaan
+- **Auto Load Balancing** - Distribusi optimal berdasarkan API key health
+- **Rate Limiting Protection** dengan auto-recovery mechanism
 
-### 1. Install Dependencies
+### 🎛️ **Custom Settings**
+- **📏 Chunk Size:** 200-2000 characters per potongan
+- **⚡ Max Concurrency:** Distribusi parallel ke multiple API keys (bukan per API key!)
+- **🎯 Quick Presets:** Safe, Balanced, Fast, Max
+- **📊 Real-time Preview:** Estimasi chunks, batches, dan waktu processing
 
+### 🔧 **Advanced Monitoring**
+- **Health Monitoring** untuk setiap API key dengan status tracking
+- **Session Management** dengan auto-resume untuk failed chunks
+- **Real-time Dashboard** dengan progress tracking dan logs
+- **Error Recovery** dengan smart retry mechanisms
+
+### 🎵 **Audio Features**
+- **50+ Voice Models** dari Google Gemini dengan kategorisasi
+- **Auto Audio Merge** untuk hasil final yang seamless
+- **Individual Chunk Download** untuk debugging dan fine-tuning
+- **Audio Preview** dengan play/pause controls
+
+### 📱 **User Experience**
+- **Responsive Design** yang mobile-friendly
+- **Navigation Menu** dengan tab switching
+- **File Upload Support** untuk .txt files
+- **LocalStorage Integration** untuk API key persistence
+
+## 🛠️ **Installation & Setup**
+
+### Prerequisites
+- Node.js 16+ dan npm/pnpm
+- Google Gemini API Keys (gratis di [Google AI Studio](https://aistudio.google.com/app/apikey))
+
+### Quick Start
 ```bash
-# Menggunakan pnpm (recommended)
+# Clone repository
+git clone https://github.com/danprat/tts.git
+cd tts
+
+# Install dependencies (recommended: pnpm untuk performance)
 pnpm install
+# atau: npm install
 
-# Atau menggunakan npm
-npm install
-
-# Atau menggunakan yarn
-yarn install
-```
-
-### 2. Dapatkan API Key
-
-1. Buka [Google AI Studio](https://aistudio.google.com/app/apikey)
-2. Login dengan akun Google
-3. Buat API key baru
-4. Copy API key untuk digunakan di aplikasi
-
-### 3. Jalankan Aplikasi
-
-```bash
-# Development mode
+# Start development server
 pnpm dev
+# atau: npm run dev
 
-# Atau
-npm run dev
+# Open browser
+open http://localhost:3001
 ```
-
-Aplikasi akan berjalan di `http://localhost:3000`
-
-## 🎛️ Cara Penggunaan
-
-### Persiapan
-1. **Setup Multi API Key** - Masukkan beberapa API key Gemini (satu per baris) untuk performa optimal
-2. **Input Text** - Ketik langsung atau upload file .txt (unlimited length)
-3. **Pilih Suara** - Klik salah satu dari 4 pilihan suara yang tersedia
-
-### Processing
-4. **Generate Audio** - Klik "Generate Audio" untuk memulai processing
-5. **Monitor Progress** - Lihat real-time progress dan API key usage
-6. **Review Chunks** - Text otomatis dipecah menjadi chunk 500 karakter
-
-### Output
-7. **Play Audio** - Dengarkan gabungan lengkap atau individual chunks
-8. **Download Options** - Download file gabungan atau semua chunk terpisah
-9. **Manage Results** - Reset untuk memulai project baru
-
-## 🎵 Jenis Suara
-
-| Suara | Karakteristik |
-|-------|---------------|
-| **Kore** | Suara natural dan jelas (default) |
-| **Charon** | Suara dalam dan kuat |
-| **Aoede** | Suara melodis dan lembut |
-| **Fenrir** | Suara tegas dan berkarakter |
-
-## 🛠️ Tech Stack
-
-- **React 18** - UI framework modern
-- **Vite** - Build tool yang cepat
-- **Axios** - HTTP client untuk API calls
-- **Lucide React** - Icon library
-- **Vanilla CSS** - Custom styling dengan CSS variables
-
-## 📁 Struktur Project
-
-```
-gemini-tts-app/
-├── src/
-│   ├── services/
-│   │   └── geminiService.js    # Service untuk Gemini API
-│   ├── App.jsx                 # Komponen utama
-│   ├── main.jsx               # Entry point
-│   └── index.css              # Global styles
-├── index.html                 # HTML template
-├── package.json              # Dependencies
-├── vite.config.js            # Vite configuration
-└── README.md                 # Dokumentasi
-```
-
-## 🔧 API Integration
-
-Aplikasi menggunakan Gemini 2.5 Flash Preview TTS model dengan endpoint:
-
-```
-POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent
-```
-
-### Request Format
-
-```json
-{
-  "contents": [{
-    "parts": [{
-      "text": "Your text here"
-    }]
-  }],
-  "generationConfig": {
-    "responseModalities": ["AUDIO"],
-    "speechConfig": {
-      "voiceConfig": {
-        "prebuiltVoiceConfig": {
-          "voiceName": "Kore"
-        }
-      }
-    }
-  }
-}
-```
-
-## 🎨 Design System
-
-### Color Palette
-- **Primary**: `#6366f1` (Indigo)
-- **Accent**: `#06b6d4` (Cyan)
-- **Success**: `#10b981` (Emerald)
-- **Error**: `#ef4444` (Red)
-
-### Typography
-- **Font**: Inter (Google Fonts)
-- **Weights**: 300, 400, 500, 600, 700
-
-## 🚀 Build & Deploy
 
 ### Production Build
-
 ```bash
+# Build untuk production
 pnpm build
-```
 
-### Preview Build
-
-```bash
+# Preview production build
 pnpm preview
 ```
 
-### Deploy Options
+## 🔑 **API Keys Setup**
 
-- **Vercel**: Drag & drop `dist` folder
-- **Netlify**: Connect GitHub repo
-- **GitHub Pages**: Push `dist` to `gh-pages` branch
+1. **Dapatkan API Keys** dari [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. **Setup Multiple Keys** untuk parallel processing:
+   ```
+   AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   AIzaSyYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+   AIzaSyZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+   ```
+3. **Auto-Save** - Keys akan tersimpan di localStorage untuk session berikutnya
 
-## 🛡️ Error Handling
+## 💡 **How Multi-Process Works**
 
-Aplikasi menangani berbagai jenis error:
+```
+Text Input (1000 chars)
+       ↓
+Chunking (500 chars each)
+       ↓
+┌─────────────────────────────────┐
+│  Chunk 1  │  Chunk 2  │  Chunk 3  │
+│  API Key 1│  API Key 2│  API Key 3│
+└─────────────────────────────────┘
+       ↓ (Parallel Processing)
+┌─────────────────────────────────┐
+│ Audio 1 │ Audio 2 │ Audio 3  │
+└─────────────────────────────────┘
+       ↓
+   Auto Merge
+       ↓
+  Final Audio.wav
+```
 
-- ❌ **400** - Request tidak valid
-- ❌ **401** - API Key tidak valid
-- ❌ **403** - Akses ditolak / quota habis
-- ❌ **429** - Rate limit exceeded
-- ❌ **500** - Server error
-- ❌ **Timeout** - Request timeout (30 detik)
+**Key Concepts:**
+- **Max Concurrency 4x** = 4 chunks processed parallel dengan 4 API keys berbeda
+- **Bukan** 4 requests per API key - tapi distribusi 1 request per API key
+- **Load Balancing** otomatis berdasarkan API key health dan usage
 
-## 📝 Best Practices
+## 🎯 **Custom Settings Explained**
 
-### Performance
-- Menggunakan Vite untuk build yang cepat
-- Lazy loading untuk components besar
-- Audio blob management yang efisien
+### 📏 **Chunk Size (200-2000 chars)**
+```
+Small (300):  Stabil, lambat  - Untuk API keys yang sering timeout
+Medium (500): Balance optimal - Setting default yang recommended  
+Large (800):  Cepat, risky    - Untuk API keys yang very stable
+XL (1200):    Maximum speed   - High risk rate limiting
+```
 
-### Security
-- API key disimpan di local state (tidak di localStorage)
-- Input validation untuk mencegah XSS
-- HTTPS only untuk production
+### ⚡ **Max Concurrency (1-10x)**
+```
+2x = 2 chunks parallel → 2 API keys different
+4x = 4 chunks parallel → 4 API keys different  
+6x = 6 chunks parallel → 6 API keys different
+Max dibatasi oleh jumlah API keys yang healthy
+```
 
-### UX/UI
-- Loading states yang jelas
-- Error messages yang informatif
-- Responsive design untuk semua device
-- Keyboard shortcuts (Ctrl+Enter)
+## 📊 **Performance Benchmarks**
 
-## 🤝 Contributing
+| Text Length | Chunk Size | Concurrency | API Keys | Est. Time | Actual Performance |
+|-------------|------------|-------------|----------|-----------|-------------------|
+| 1000 chars  | 500        | 2x          | 2 keys   | ~6s       | ⚡ Fast           |
+| 2000 chars  | 500        | 4x          | 4 keys   | ~9s       | ⚡⚡ Very Fast      |
+| 5000 chars  | 800        | 6x          | 6 keys   | ~15s      | ⚡⚡⚡ Lightning     |
 
-1. Fork repository
-2. Buat feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push ke branch (`git push origin feature/amazing-feature`)
-5. Buat Pull Request
+## 🔧 **Project Structure**
 
-## 📄 License
+```
+src/
+├── components/
+│   └── MultiProcessMonitor.jsx    # Real-time monitoring dashboard
+├── hooks/
+│   ├── useMultiProcessTTS.js       # Main TTS hook dengan state management  
+│   └── useLocalStorage.js          # Persistent storage utilities
+├── services/
+│   ├── geminiService.js            # Google Gemini API integration
+│   └── multiProcessService.js      # Multi-process engine core
+├── AppMultiProcess.jsx             # Main application component
+├── index.css                       # Comprehensive styling
+└── main.jsx                        # Application entry point
+```
 
-MIT License - silakan gunakan untuk project pribadi atau komersial.
+## 🚨 **Troubleshooting**
 
-## 🆘 Troubleshooting
+### Common Issues & Solutions
 
-### API Key Error
-- Pastikan API key valid dan aktif
-- Cek quota di Google AI Studio
-- Pastikan billing account sudah setup (jika diperlukan)
+**❌ "Semua API keys bermasalah"**
+```
+✅ Check API keys validity di Google AI Studio
+✅ Tunggu 5-10 menit untuk rate limit recovery
+✅ Gunakan preset "Safe" untuk API keys yang unstable
+```
 
-### Audio Tidak Muncul
-- Cek browser permissions untuk audio
-- Pastikan browser mendukung Web Audio API
-- Coba dengan browser yang berbeda
+**❌ "Rate Limited"** 
+```
+✅ Reduce Max Concurrency ke 2x atau 3x
+✅ Increase Chunk Size untuk fewer requests
+✅ Add more API keys untuk load distribution
+```
 
-### Build Error
-- Pastikan Node.js versi 16+
-- Clear node_modules dan reinstall
-- Cek file permissions
+**❌ "Audio tidak merged"**
+```
+✅ Check browser console untuk merge errors
+✅ Download individual chunks sebagai workaround
+✅ Retry dengan chunk size yang lebih kecil
+```
 
-## 🔗 Links
+## 🤝 **Contributing**
 
-- [Google AI Studio](https://aistudio.google.com/)
-- [Gemini API Documentation](https://ai.google.dev/docs)
-- [React Documentation](https://react.dev/)
-- [Vite Documentation](https://vitejs.dev/)
+1. Fork repository ini
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push ke branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
+
+## 📝 **Development Notes**
+
+### Tech Stack
+- **Frontend:** React 18 + Vite 4 + Lucide React Icons
+- **Styling:** Pure CSS dengan CSS Variables dan Responsive Design
+- **State Management:** React Hooks + Custom Hooks pattern
+- **Storage:** LocalStorage untuk API keys persistence
+- **Audio:** Web Audio API dengan Blob manipulation
+
+### Performance Optimizations
+- **Lazy Loading** untuk components dan audio processing
+- **Memory Management** dengan proper cleanup untuk audio URLs
+- **Efficient Re-renders** dengan optimized state updates
+- **Bundle Optimization** dengan Vite tree-shaking
+
+## 📄 **License**
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🙏 **Acknowledgments**
+
+- **Google Gemini** untuk amazing Text-to-Speech API
+- **React Team** untuk excellent development experience  
+- **Vite Team** untuk lightning-fast development tools
+- **Lucide** untuk beautiful and consistent icons
 
 ---
 
-Dibuat dengan ❤️ menggunakan React dan Google Gemini AI 
+**⭐ Star repo ini jika helpful! Contributions welcome! 🚀**
+
+**🔗 Links:**
+- [Live Demo](https://your-demo-url.com) (coming soon)
+- [Google AI Studio](https://aistudio.google.com/app/apikey) - Get your API keys
+- [Issues](https://github.com/danprat/tts/issues) - Report bugs atau request features
+- [Discussions](https://github.com/danprat/tts/discussions) - Community support 
