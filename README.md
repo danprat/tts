@@ -220,3 +220,22 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - [Google AI Studio](https://aistudio.google.com/app/apikey) - Get your API keys
 - [Issues](https://github.com/danprat/tts/issues) - Report bugs atau request features
 - [Discussions](https://github.com/danprat/tts/discussions) - Community support 
+
+## 👤 **Author & Contact**
+
+**Dany Pratmanto**  
+📱 **WhatsApp:** [08974041777](https://wa.me/6208974041777?text=Halo%20Dany%2C%20saya%20tertarik%20dengan%20Multi-Process%20TTS%20App)  
+💼 **GitHub:** [@danprat](https://github.com/danprat)  
+🚀 **Project:** [Multi-Process TTS App](https://github.com/danprat/tts)
+
+> *Specialized in building advanced AI applications with React, multi-processing systems, and API integrations. Available for freelance projects and consultations.*
+
+---
+
+## 🤝 **Contributing**
+
+1. Fork repository ini
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push ke branch: `git push origin feature/amazing-feature`
+5. Open Pull Request 

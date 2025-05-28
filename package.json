@@ -1,8 +1,32 @@
 {
-  "name": "gemini-tts-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "multi-process-tts-app",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Advanced Multi-Process Text-to-Speech application dengan Google Gemini API, parallel processing, health monitoring, dan auto-resume functionality",
   "type": "module",
+  "author": {
+    "name": "Dany Pratmanto",
+    "phone": "08974041777",
+    "whatsapp": "https://wa.me/6208974041777",
+    "github": "https://github.com/danprat"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danprat/tts.git"
+  },
+  "keywords": [
+    "text-to-speech",
+    "tts",
+    "google-gemini",
+    "multi-process",
+    "parallel-processing",
+    "react",
+    "vite",
+    "ai",
+    "voice-synthesis",
+    "indonesian-developer"
+  ],
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

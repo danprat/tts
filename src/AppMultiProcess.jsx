@@ -411,6 +411,57 @@ const AppMultiProcess = () => {
             🚀 Proses parallel, Resume otomatis, Health monitoring
           </span>
         </p>
+        
+        {/* Author Info */}
+        <div style={{ 
+          marginTop: '1rem',
+          padding: '0.75rem 1rem',
+          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1))',
+          border: '1px solid rgba(99, 102, 241, 0.2)',
+          borderRadius: 'var(--radius-lg)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            fontSize: '0.875rem',
+            color: 'var(--color-text-secondary)'
+          }}>
+            <span style={{ fontSize: '1.1rem' }}>👨‍💻</span>
+            <span>
+              <strong style={{ color: 'var(--color-text)' }}>Developed by:</strong> Dany Pratmanto
+            </span>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            fontSize: '0.875rem',
+            color: 'var(--color-text-secondary)'
+          }}>
+            <span style={{ fontSize: '1.1rem' }}>📱</span>
+            <a 
+              href="https://wa.me/6208974041777" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                color: 'var(--color-primary)', 
+                textDecoration: 'none',
+                fontWeight: '600',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+              onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+            >
+              WhatsApp: 08974041777
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className="content">
@@ -1077,6 +1128,125 @@ const AppMultiProcess = () => {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Footer with Author Info */}
+      <div style={{
+        marginTop: '3rem',
+        padding: '1.5rem',
+        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05))',
+        border: '1px solid rgba(99, 102, 241, 0.1)',
+        borderRadius: 'var(--radius-lg)',
+        textAlign: 'center'
+      }}>
+        <div style={{ marginBottom: '1rem' }}>
+          <h3 style={{ 
+            margin: '0 0 0.5rem 0',
+            color: 'var(--color-text)',
+            fontSize: '1.125rem',
+            fontWeight: '600'
+          }}>
+            🚀 Multi-Process TTS Application
+          </h3>
+          <p style={{ 
+            margin: 0,
+            color: 'var(--color-text-secondary)',
+            fontSize: '0.875rem'
+          }}>
+            Advanced Text-to-Speech dengan parallel processing menggunakan Google Gemini API
+          </p>
+        </div>
+        
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '2rem',
+          flexWrap: 'wrap',
+          marginBottom: '1rem'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            fontSize: '0.875rem'
+          }}>
+            <span style={{ fontSize: '1.2rem' }}>👨‍💻</span>
+            <span style={{ color: 'var(--color-text)' }}>
+              <strong>Developer:</strong> Dany Pratmanto
+            </span>
+          </div>
+          
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            fontSize: '0.875rem'
+          }}>
+            <span style={{ fontSize: '1.2rem' }}>📱</span>
+            <a 
+              href="https://wa.me/6208974041777?text=Halo%20Dany%2C%20saya%20tertarik%20dengan%20Multi-Process%20TTS%20App" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                color: 'var(--color-primary)', 
+                textDecoration: 'none',
+                fontWeight: '600',
+                transition: 'all 0.2s ease',
+                padding: '0.25rem 0.5rem',
+                borderRadius: 'var(--radius)',
+                background: 'rgba(99, 102, 241, 0.1)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'rgba(99, 102, 241, 0.2)';
+                e.target.style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'rgba(99, 102, 241, 0.1)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              WhatsApp: 08974041777
+            </a>
+          </div>
+          
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            fontSize: '0.875rem'
+          }}>
+            <span style={{ fontSize: '1.2rem' }}>💼</span>
+            <a 
+              href="https://github.com/danprat/tts" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                color: 'var(--color-primary)', 
+                textDecoration: 'none',
+                fontWeight: '600',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+              onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+            >
+              GitHub Repository
+            </a>
+          </div>
+        </div>
+        
+        <div style={{
+          paddingTop: '1rem',
+          borderTop: '1px solid rgba(99, 102, 241, 0.1)',
+          fontSize: '0.75rem',
+          color: 'var(--color-text-secondary)'
+        }}>
+          © 2024 Dany Pratmanto. Built with React + Vite + Google Gemini API
+          <br />
+          <span style={{ color: 'var(--color-primary)' }}>
+            ⚡ Features: Multi-Process Parallel Processing, Auto Resume, Health Monitoring, Custom Settings
+          </span>
+        </div>
       </div>
 
       {/* API Key Selector Modal */}
