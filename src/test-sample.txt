@@ -1,0 +1,13 @@
+Halo, ini adalah test text untuk aplikasi Multi-Process TTS yang telah diperbaiki. 
+
+Text ini akan dipecah menjadi beberapa chunk untuk diproses secara parallel menggunakan multiple API keys. Dengan sistem multi-processing, aplikasi dapat memproses text yang panjang dengan lebih cepat dan efisien.
+
+Sistem health monitoring akan memantau kesehatan setiap API key secara real-time. Jika ada key yang error atau rate limited, sistem akan otomatis beralih ke key lain yang tersedia dan mencoba ulang processing.
+
+Fitur resume memungkinkan Anda untuk melanjutkan proses dari chunk yang gagal tanpa harus mengulang dari awal. Ini sangat menghemat waktu dan kuota API. Auto-switch API key sudah diperbaiki.
+
+Dashboard monitoring memberikan insight detail tentang progress processing, status API keys, dan logs real-time. Semua informasi penting tersedia dalam satu tempat dengan feedback yang jelas.
+
+Preview audio per chunk juga sudah diperbaiki dan dapat diputar langsung di browser. Sistem retry otomatis akan mencoba 3 kali dengan API key yang berbeda sebelum menandai chunk sebagai gagal.
+
+Dengan teknologi ini, conversion text-to-speech menjadi lebih robust, cepat, dan user-friendly. Rate limiting akan dideteksi otomatis dan sistem akan beralih ke API key lain yang tersedia. Selamat mencoba fitur baru ini! 

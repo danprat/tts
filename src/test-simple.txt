@@ -1,0 +1,1 @@
+Ini adalah test sederhana untuk audio preview. Text ini akan dipecah menjadi dua chunk untuk testing. Chunk pertama berisi kalimat ini. Chunk kedua berisi kalimat berikutnya untuk memastikan preview audio berfungsi dengan baik. 

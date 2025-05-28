@@ -1,0 +1,19 @@
+Selamat datang di aplikasi Gemini TTS yang telah diperbarui dengan fitur canggih!
+
+Aplikasi ini sekarang mendukung penggunaan multiple API key secara round robin, yang berarti Anda dapat memasukkan beberapa API key dan sistem akan menggunakannya secara bergantian untuk memproses text yang panjang.
+
+Fitur terbaru yang paling menarik adalah kemampuan untuk memproses text tanpa batas panjang. Text akan dipecah secara otomatis menjadi chunk-chunk berukuran maksimal 500 karakter, dengan tetap mempertahankan struktur kalimat agar hasilnya terdengar natural.
+
+Sistem chunking yang cerdas ini akan mencoba memotong text pada akhir kalimat, sehingga tidak ada kata yang terpotong di tengah. Jika ada kalimat yang terlalu panjang, sistem akan memotongnya berdasarkan kata.
+
+Setiap chunk akan diproses menggunakan API key yang berbeda secara bergantian, sehingga dapat mengurangi beban pada masing-masing API key dan menghindari rate limiting. Anda dapat memonitor penggunaan setiap API key melalui statistik yang ditampilkan secara real-time.
+
+Hasil audio dapat diunduh dalam dua format: sebagai file gabungan lengkap, atau sebagai file-file terpisah untuk setiap chunk. Ini memberikan fleksibilitas maksimal dalam penggunaan audio yang dihasilkan.
+
+File text dapat diupload langsung melalui tombol upload dengan dukungan file hingga 10MB. Format yang didukung adalah .txt dengan encoding UTF-8.
+
+Progress processing ditampilkan secara real-time, lengkap dengan informasi chunk mana yang sedang diproses dan persentase penyelesaian keseluruhan.
+
+Dengan chunk size 500 karakter, processing menjadi lebih cepat dan efisien! Aplikasi ini perfect untuk berbagai use case seperti pembuatan audiobook, narasi video, podcast, atau keperluan accessibility.
+
+Mari coba fitur baru ini dan rasakan pengalaman Text-to-Speech yang lebih powerful dan fleksibel! 
