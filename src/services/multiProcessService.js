@@ -218,6 +218,24 @@ class MultiProcessApiKeyManager {
     return sortedKeys[0];
   }
 
+  // Method baru untuk mendapatkan API keys terdistribusi untuk batch parallel
+  distributeApiKeysForBatch(batchSize) {
+    const keysSehat = this.ambilApiKeysSehat();
+    
+    if (keysSehat.length === 0) {
+      throw new Error('Tidak ada API Key yang tersedia untuk distribusi batch');
+    }
+
+    // Distribusi key ke setiap chunk dalam batch
+    const distributedKeys = [];
+    for (let i = 0; i < batchSize; i++) {
+      const keyIndex = i % keysSehat.length; // Round-robin distribution
+      distributedKeys.push(keysSehat[keyIndex]);
+    }
+
+    return distributedKeys;
+  }
+
   // Method baru untuk mendapatkan semua API keys untuk manual selection
   getApiKeysForManualSelection() {
     return this.apiKeys.map(key => ({
@@ -237,8 +255,14 @@ export const multiApiKeyManager = new MultiProcessApiKeyManager();
 
 /**
  * Process single chunk dengan error handling dan retry logic
+ * @param {string} chunk - Text chunk to process
+ * @param {number} index - Chunk index
+ * @param {string} voiceName - Voice name for TTS
+ * @param {function} onProgress - Progress callback
+ * @param {number} maxRetries - Maximum retry attempts
+ * @param {string} assignedApiKey - Pre-assigned API key untuk parallel processing
  */
-const prosesChunkTunggal = async (chunk, index, voiceName, onProgress, maxRetries = 3) => {
+const prosesChunkTunggal = async (chunk, index, voiceName, onProgress, maxRetries = 3, assignedApiKey = null) => {
   let lastError = null;
   
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -248,8 +272,21 @@ const prosesChunkTunggal = async (chunk, index, voiceName, onProgress, maxRetrie
         throw new Error('Tidak ada API Key yang sehat untuk processing');
       }
       
-      // Ambil API key yang sehat untuk setiap percobaan
-      const apiKey = multiApiKeyManager.ambilApiKeyTerbaik();
+      // Gunakan assigned key untuk attempt pertama, kalau retry baru pilih key terbaik
+      let apiKey;
+      if (attempt === 0 && assignedApiKey) {
+        // Validasi assigned key masih sehat
+        const keysSehat = multiApiKeyManager.ambilApiKeysSehat();
+        if (keysSehat.includes(assignedApiKey)) {
+          apiKey = assignedApiKey;
+        } else {
+          // Kalau assigned key tidak sehat, ambil yang terbaik
+          apiKey = multiApiKeyManager.ambilApiKeyTerbaik();
+        }
+      } else {
+        // Untuk retry attempts, ambil API key yang terbaik yang tersedia
+        apiKey = multiApiKeyManager.ambilApiKeyTerbaik();
+      }
       
       if (onProgress) {
         onProgress({
@@ -258,7 +295,8 @@ const prosesChunkTunggal = async (chunk, index, voiceName, onProgress, maxRetrie
           apiKey: apiKey.substring(0, 10) + '...',
           text: chunk.substring(0, 50) + (chunk.length > 50 ? '...' : ''),
           attempt: attempt + 1,
-          maxRetries: maxRetries + 1
+          maxRetries: maxRetries + 1,
+          assignedKey: assignedApiKey ? assignedApiKey.substring(0, 10) + '...' : null
         });
       }
 
@@ -274,7 +312,8 @@ const prosesChunkTunggal = async (chunk, index, voiceName, onProgress, maxRetrie
           ...result,
           text: chunk,
           index,
-          apiKeyUsed: apiKey.substring(0, 10) + '...'
+          apiKeyUsed: apiKey.substring(0, 10) + '...',
+          wasAssigned: assignedApiKey === apiKey
         }
       };
       
@@ -316,7 +355,8 @@ const prosesChunkTunggal = async (chunk, index, voiceName, onProgress, maxRetrie
     index,
     error: lastError?.message || 'Unknown error',
     chunk,
-    apiKey: 'multiple-attempts'
+    apiKey: 'multiple-attempts',
+    assignedKey: assignedApiKey ? assignedApiKey.substring(0, 10) + '...' : null
   };
 };
 
@@ -397,7 +437,7 @@ export const generateAudioMultiProcess = async (
       const batchEnd = Math.min(batchStart + finalMaxConcurrency, totalChunks);
       const batchChunks = [];
       
-      // Prepare batch
+      // Prepare batch dengan distribusi API keys
       for (let i = batchStart; i < batchEnd; i++) {
         if (!completedChunks.has(i)) {
           // Cek apakah masih ada key yang sehat
@@ -414,6 +454,9 @@ export const generateAudioMultiProcess = async (
 
       if (batchChunks.length === 0) continue;
 
+      // Distribusi API keys untuk batch chunks
+      const distributedApiKeys = multiApiKeyManager.distributeApiKeysForBatch(batchChunks.length);
+
       if (onProgress) {
         onProgress({
           type: 'batch_start',
@@ -421,13 +464,21 @@ export const generateAudioMultiProcess = async (
           batchEnd,
           batchSize: batchChunks.length,
           progress: Math.round((batchStart / totalChunks) * 100),
-          maxConcurrency: finalMaxConcurrency
+          maxConcurrency: finalMaxConcurrency,
+          distributedKeys: distributedApiKeys.map(key => key.substring(0, 10) + '...')
         });
       }
 
-      // Process batch secara parallel
-      const batchPromises = batchChunks.map(({ chunk, index }) => 
-        prosesChunkTunggal(chunk, index, voiceName, onProgress)
+      // Process batch secara parallel dengan distributed API keys
+      const batchPromises = batchChunks.map(({ chunk, index }, batchIndex) => 
+        prosesChunkTunggal(
+          chunk, 
+          index, 
+          voiceName, 
+          onProgress, 
+          3, // maxRetries
+          distributedApiKeys[batchIndex] // assigned API key untuk chunk ini
+        )
       );
 
       const batchResults = await Promise.allSettled(batchPromises);
