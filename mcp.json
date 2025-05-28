@@ -1,0 +1,9 @@
+{
+  "_comment": "MCP (Model Context Protocol) configuration for Cursor IDE - Enables advanced AI capabilities and context management for this Multi-Process TTS project",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  }
+}
